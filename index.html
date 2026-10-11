@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>買い物メモ</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #fffdf7; color: #222; max-width: 28rem; margin: 2rem auto; padding: 0 1rem; }
+    h1 { font-size: 1.5rem; }
+    form { display: flex; gap: .5rem; }
+    input[type=text] { flex: 1; font-size: 1rem; padding: .5rem; }
+    button { font-size: 1rem; padding: .5rem 1rem; background: #2f7d32; color: #fff; border: 0; border-radius: .4rem; }
+    ul { list-style: none; padding: 0; }
+    li { padding: .5rem 0; border-bottom: 1px solid #eee; }
+    li.done label { text-decoration: line-through; color: #999; }
+  </style>
+</head>
+<body>
+  <h1>買い物メモ</h1>
+  <form id="add-form">
+    <label for="item">品物</label>
+    <input id="item" type="text" autocomplete="off">
+    <button type="submit">追加</button>
+  </form>
+  <ul id="list" aria-label="買う物"></ul>
+  <p id="left" role="status">残り 0 品</p>
+  <script>
+    const form = document.getElementById('add-form');
+    const input = document.getElementById('item');
+    const list = document.getElementById('list');
+    const left = document.getElementById('left');
+
+    function updateLeft() {
+      const n = list.querySelectorAll('input[type=checkbox]:not(:checked)').length;
+      left.textContent = `残り ${n} 品`;
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = input.value.trim();
+      if (!name) return;
+      const li = document.createElement('li');
+      const label = document.createElement('label');
+      const box = document.createElement('input');
+      box.type = 'checkbox';
+      box.addEventListener('change', () => { li.classList.toggle('done', box.checked); updateLeft(); });
+      label.append(box, ' ', name);
+      li.append(label);
+      list.append(li);
+      input.value = '';
+      updateLeft();
+    });
+  </script>
+</body>
+</html>

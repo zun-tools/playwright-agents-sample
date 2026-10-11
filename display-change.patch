@@ -1,0 +1,23 @@
+diff --git a/index.html b/index.html
+index 5d75916..57feed9 100644
+--- a/index.html
++++ b/index.html
+@@ -23,7 +23,7 @@
+     <button type="submit">追加</button>
+   </form>
+   <ul id="list" aria-label="買う物"></ul>
+-  <p id="left" role="status">残り 0 品</p>
++  <p id="left" role="status">残り 0 / 0 品</p>
+   <script>
+     const form = document.getElementById('add-form');
+     const input = document.getElementById('item');
+@@ -32,7 +32,8 @@
+ 
+     function updateLeft() {
+       const n = list.querySelectorAll('input[type=checkbox]:not(:checked)').length;
+-      left.textContent = `残り ${n} 品`;
++      const all = list.querySelectorAll('input[type=checkbox]').length;
++      left.textContent = `残り ${n} / ${all} 品`;
+     }
+ 
+     form.addEventListener('submit', (e) => {

@@ -1,0 +1,13 @@
+{
+  "name": "shopping-memo",
+  "version": "1.0.0",
+  "description": "買い物メモ（Playwright 再入門のサンプル）",
+  "scripts": {},
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "@types/node": "^26.6.5"
+  },
+  "private": true
+}
